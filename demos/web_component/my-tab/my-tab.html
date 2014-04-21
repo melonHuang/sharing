@@ -8,34 +8,34 @@
             display: block;
             width: 400px;
             height: 300px;
-            border: 1px solid #888;
+            background: #fff;
+            border-radius: 5px;
+            overflow: hidden;
         }
 
         /* 标签栏 */
         .tab {
-            height: 50px;
-            line-height: 50px;
-            border-bottom: 1px solid #888;
-            text-align: justify;
-            padding: 15px;
-        }
-
-        .tab:after {
-            content: ' ';
+            box-sizing: border-box;
+            height: 48px;
+            line-height: 48px;
+            background: #f88;
+            display: table;
             width: 100%;
-            display: inline-block;
         }
-
         ::content a {
             text-decoration: none;
+            color: #fff;
+            display: table-cell;
+            text-align: center;
+            border-left: 1px solid #fff;
         }
-
-        ::content a:after {
-            content: ' ';
+        ::content a:first-child {
+            border-left: none;
         }
-
         ::content a.active {
-            color: #f66;
+            font-weight: bold;
+            background: #fff;
+            color: #f88
         }
 
         /* 内容 */
@@ -51,8 +51,9 @@
             box-sizing: border-box;
             left: 0;
             top: 0;
-            padding: 15px;
-        } 
+            padding: 32px;
+            text-align: center;
+        }
 
         ::content div.active {
             display: block;
