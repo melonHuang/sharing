@@ -1,0 +1,129 @@
+<!-- 组件模板 -->
+<template>
+    <!-- 样式表 -->
+    <style type="text/css">
+
+        /* tab容器 */
+        :host {
+            display: block;
+            width: 400px;
+            height: 300px;
+            border: 1px solid #888;
+        }
+
+        /* 标签栏 */
+        .tab {
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #888;
+            text-align: justify;
+            padding: 15px;
+        }
+
+        .tab:after {
+            content: ' ';
+            width: 100%;
+            display: inline-block;
+        }
+
+        ::content a {
+            text-decoration: none;
+        }
+
+        ::content a:after {
+            content: ' ';
+        }
+
+        ::content a.active {
+            color: #f66;
+        }
+
+        /* 内容 */
+        .content {
+            position: relative;
+        }
+
+        ::content div {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            left: 0;
+            top: 0;
+            padding: 15px;
+        } 
+
+        ::content div.active {
+            display: block;
+        }
+
+    </style>
+
+    <!-- 标签 -->
+    <div class="tab">
+        <content select="a"></content>
+    </div>
+
+    <!-- 内容 -->
+    <div class="content">
+        <content select="div"></content>
+    </div>
+</template>
+
+<script type="text/javascript">
+    (function() {
+        // importDoc 是导入文档的引用
+        var importDoc = document.currentScript.ownerDocument;
+
+        // mainDoc 是主文档(包含导入的页面)的引用
+        var mainDoc = document;
+
+        // 继承自HTMLElement.prototype
+        var proto = Object.create(HTMLElement.prototype);
+
+        proto.createdCallback = function() {
+            // 获取模板，创建并插入shadow dom
+            var template = importDoc.querySelector('template');
+            var shadowRoot = this.createShadowRoot();
+            shadowRoot.appendChild(template.content.cloneNode(true));
+
+            // tabs, contents节点
+            this.tabs = this.querySelectorAll('a');
+            this.contents = this.querySelectorAll('div');
+
+            // 绑定tabs的click事件
+            var me = this;
+            for(var i = 0; i < this.tabs.length; i++) {
+                var tab = this.tabs[i];
+                tab.addEventListener('click', (function(i) {
+                    return function(e) {
+                        e.preventDefault();
+                        me.setAttribute('index', i);
+                    }
+                })(i));
+            }
+
+            // 显示第一项
+            var index = this.getAttribute('index');
+            if(index === null) index = 0;
+            this.contents[index].classList.add('active');
+            this.tabs[index].classList.add('active');
+        };
+
+        // 监听属性改变
+        proto.attributeChangedCallback = function(name, oldVal, newVal) {
+            if(name === 'index') {
+                this.contents[oldVal].classList.remove('active');
+                this.contents[newVal].classList.add('active');
+                this.tabs[oldVal].classList.remove('active');
+                this.tabs[newVal].classList.add('active');
+            }
+        }
+
+        // 注册my-tab元素
+        mainDoc.registerElement('my-tab', {
+            prototype: proto
+        });
+     })();
+</script>
