@@ -1,0 +1,30 @@
+    <link rel="stylesheet" href="http://s5.qhimg.com/!06284204/markdown_github.css" />
+    <script type="text/javascript" src="http://s7.qhimg.com/!c7b1d2fc/marked.js"></script>
+<script type="text/javascript">
+    (function() {
+        // importDoc 是导入文档的引用
+        var importDoc = document.currentScript.ownerDocument;
+
+        // mainDoc 是主文档(包含导入的页面)的引用
+        var mainDoc = document;
+
+        // 继承自HTMLElement.prototype
+        var proto = Object.create(HTMLElement.prototype);
+
+        proto.createdCallback = function() {
+            // 获取模板，创建shadow dom
+            var template = importDoc.querySelector('template');
+            var shadowRoot = this.createShadowRoot();
+
+            var html = marked(this.innerHTMl);
+
+            debugger;
+
+        };
+
+        // 注册my-tab元素
+        mainDoc.registerElement('mark-down', {
+            prototype: proto
+        });
+     })();
+</script>

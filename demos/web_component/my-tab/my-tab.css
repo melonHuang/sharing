@@ -1,0 +1,55 @@
+/* tab容器 */
+:host {
+    display: block;
+    width: 400px;
+    height: 300px;
+    border: 1px solid #888;
+}
+
+/* 标签栏 */
+.tab {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #888;
+    text-align: justify;
+    padding: 15px;
+}
+
+.tab:after {
+    content: ' ';
+    width: 100%;
+    display: inline-block;
+}
+
+::content a {
+    text-decoration: none;
+}
+
+::content a:after {
+    content: ' ';
+}
+
+::content a.active {
+    color: #f66;
+}
+
+/* 内容 */
+.content {
+    position: relative;
+}
+
+::content div {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    padding: 15px;
+} 
+
+::content div.active {
+    display: block;
+}
+
