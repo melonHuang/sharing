@@ -2,8 +2,16 @@
 @bg: img/web_component/dinner.png
 # Good Evening
 ---
-@state: green
+@state: green, @fragment
 <style type="text/css">
+.reveal .slides h1,
+.reveal .slides h2,
+.reveal .slides h3,
+.reveal .slides h4,
+.reveal .slides p,
+.reveal .slides li {
+    font-family: Helvetica;
+}
 .self-intro .avatar {
     display: inline-block;
     width: 150px;
@@ -22,6 +30,10 @@
     font-size: 46px; 
     padding-right: 10px;
 }
+
+.contact-list a {
+    color: white;
+}
 .reveal .wc-title {
     color: #999;
 }
@@ -31,15 +43,31 @@
 .initial-component {
     color: #669900;
 }
+.reveal .slides .today {
+    color: rgb(206, 21, 21);
+    font-size: 184px;
+    border: 8px solid rgb(206, 21, 21);
+    padding: 100px;
+    -webkit-transform: rotate(20deg);
+    display: block;
+    position: relative;
+    top: -230px;
+    background: rgba(255, 255, 255, 0.5);
+}
 </style>
 <div class="self-intro">
     <span class="avatar"></span>
     <h2 class="name">Melon.H</h2>
 </div>
 <ul class="contact-list">
-    <li><i class="fa fa-github"></i>Git</li>
-    <li>Blog</li>
-    <li>NovaUI</li>
+    <li>联盟@奇舞团.360</li>
+    <li>白羊座，爱好<i class="fa fa-music"></i>和运动</li>
+    <li>
+        <a href="http://blog.melonhuang.gitpress.org" style="color:white">Blog</a>
+    </li>
+    <li>
+        <a href="http://75team.github.io/novaUI/" style="color:white">NovaUI</a>
+    </li>
 </ul>
 
 ---
@@ -52,12 +80,16 @@
 
 ## 今天的Web组件
 
-bootstrap, foudation, jquery plugin图片...
+<img src="img/web_component/bootstrap.png" alt=""  width="160" height="160" style="margin-right: 50px;"/>
+<img src="img/web_component/react.png" alt=""  width="160" height="160" style="margin-right: 50px;"/>
+<img src="img/web_component/yui.jpeg" alt=""  width="160" height="160" style="margin-right: 50px;"/>
+
+......
 
 ---
 @state: light
 
-## 你如何使用Boostrap？
+## 你如何使用Bootstrap？
 
 ---
 @state: light
@@ -69,9 +101,7 @@ bootstrap, foudation, jquery plugin图片...
 ---
 @state: light
 
-## Step2: 
-
-拷贝CSS, HTML, JS
+## Step2: 拷贝CSS, HTML, JS
 
 ![bootstrap code](http://p7.qhimg.com/d/inn/e31d5c20/bootstrapcode.jpg)
 
@@ -87,6 +117,12 @@ bootstrap, foudation, jquery plugin图片...
 @state: light
 
 ## We can do better !
+
+---
+
+@state: light, @fragment
+
+## Good <i class="fa fa-thumbs-up"></i>
 
 ```markup
 <my-tab>
@@ -112,7 +148,7 @@ bootstrap, foudation, jquery plugin图片...
 
 ---
 
-@state: blue
+@state: light, @fragment
 
 ## 理想中的Web组件模型？
 
@@ -135,7 +171,7 @@ bootstrap, foudation, jquery plugin图片...
 @state: light
 
 ## Template 
-一组可重用的懒惰代码
+一组可重用的惰性代码
 
 
 ---
@@ -143,7 +179,7 @@ bootstrap, foudation, jquery plugin图片...
 
 ## Template
 
-* 懒惰 - 资源不加载，脚本不运行
+* 惰性 - 资源不加载，脚本不运行
 * 子节点不属于DOM, 属于template附属的document fragment
 ```javascript
     template.children === null //always true
@@ -151,8 +187,9 @@ bootstrap, foudation, jquery plugin图片...
 ---
 
 ## Content属性
+@state: light
 
-图, 标注, documentFragment
+<img src="img/web_component/template.jpg" alt=""/>
 
 ---
 @state: light
@@ -169,17 +206,14 @@ bootstrap, foudation, jquery plugin图片...
 style 和 markup 封装
 
 ---
-@state: light
+@state: light, @fragment
 
 
 ## Shadow DOM就在我们眼前
 
-
-<input type="date" style="font-size: 30px;" value="2014-01-01"/>
-
-```markup
-<input type="date" style="font-size: 30px;"/>
-```
+<p style="padding:10px 0; padding-bottom: 30px;">
+ <input type="date" style="font-size: 36px;" value="2014-01-01"/>
+</p>
 
 * 其他例子：video, textarea, details
 
@@ -188,17 +222,7 @@ style 和 markup 封装
 
 ## Shadow Dom
 
-* Shadow Host
-
-    - 包含shadow dom的节点 
-
-* Shadow Root
-
-    - shadow dom的根节点
-
-* Shadow Boundary
-
-    - 样式和标记的界限
+<img src="img/web_component/concept.jpg" alt=""/>
 
 ---
 
@@ -215,23 +239,26 @@ style 和 markup 封装
 ---
 
 ## 操作shadow dom
-@state: light
+@state: light, @fragment
 
 * shadow dom不属于main document
 ```javascript
 ducument.querySelector('element-in-shadow') === null //true
 ```
 * shadowRoot = element.createShadowRoot() 
-* shadoeRoot = element.shadow
+* shadowRoot = element.shadow
 * shadowRoot.querySelector可获取shadow dom中的内容并操作
 
 ---
 
 @state: light
 ## 样式封装
-样式定义不穿过Shadow boundary
 
 <iframe src="http://jsbin.com/xevot/1/embed?html,output" class="" id="" style="border: 1px solid rgb(170, 170, 170); width: 100%; min-height: 500px; height: 46px;"></iframe>
+
+<p class="fragment">
+样式定义不穿过Shadow boundary
+</p>
 
 ---
 
@@ -246,12 +273,12 @@ ducument.querySelector('element-in-shadow') === null //true
 ---
 
 ### 设置Shadow host样式
-@state: light
+@state: light, @fragment
 
 * :host伪类可以在shadow root中，设置shadow host的样式
 * :host(selector) 会选中匹配该selector的shadow host
+* :host-context(selector) 会选中匹配该selector或祖先元素匹配该selector的shadow host
 * :host(:hover, :active)
-* :host-context
 
 ---
 
@@ -333,7 +360,7 @@ button {
 ## Insertion point
 @state: light
 
-Insertion point可以将Shadow host中的内容插入到Shadow dom中
+将Shadow host中的内容插入到Shadow dom中
 
 ---
 
@@ -400,10 +427,6 @@ document.register('tag-name', {
 
 ---
 
-## defining API
-
----
-
 @state: light
 ## 使用自定义元素
 
@@ -420,25 +443,25 @@ document.register('tag-name', {
 
 * createdCallback
 
-    when a new instance is created
+    <span style="color: #666;font-size:24px;padding-left:25px;">创建组件实例时触发</span>
 
 * enteredViewCallback
 
-    when it's added to the page
+    <span style="color: #666;font-size:24px;padding-left:25px;">组件插入到页面时触发</span>
 
 * LeftViewCallback
 
-    removed from the page
+    <span style="color: #666;font-size:24px;padding-left:25px;">创建从页面中删除时触发</span>
 
 * attributeChangedCallback(attrName, oldVal, newVal)
 
-    when one of an element's attrubte changed
+    <span style="color: #666;font-size:24px;padding-left:25px;">通过setAttribute修改组件属性时触发</span>
 ---
 
 ## 继承
 @state: light
 
-<iframe src="http://jsbin.com/wixup/2/embed?html,js" class="" id="" style="border: 1px solid rgb(170, 170, 170); width: 100%; min-height: 500px; height: 46px;"></iframe>
+<iframe src="http://jsbin.com/fesof/1/embed?html,js" class="" id="" style="border: 1px solid rgb(170, 170, 170); width: 100%; min-height: 500px; height: 46px;"></iframe>
 
 ---
 
@@ -446,6 +469,7 @@ document.register('tag-name', {
 @state: light
 
 * &lt;button is="my-button"&gt;&lt;/button&gt;
+* &lt;my-button&gt;&lt;/my-button&gt;
 * var btn = document.createElement('button', 'my-button');
 * var btn  = new MyButton();
 
@@ -455,7 +479,7 @@ document.register('tag-name', {
 ## Import
 
 ---
-@state: light
+@state: light, @fragment
 
 ## html中如何加载document??
 
@@ -499,12 +523,13 @@ document.register('tag-name', {
 * No need to check if the import is loaded, auto update
 
 ---
+@state: light
 
-## Note
+## Import
 
-* import的文档不属于dom
-* 通过link.import属性获得
-* script会运行
+* import中的HTML, CSS不会自动加载到DOM中
+* 可通过link.import获取引入文档的内容
+* import中的script会在main document的上下文中运行
 
 ---
 
@@ -519,33 +544,43 @@ document.register('tag-name', {
 ---
 @state: light
 
-list
+
+<h2>
+<a href="demos/web_component/tab.html?file=web_component&width=800&height=900#/50">Demo</a>
+</h2>
 
 ---
-@state: light
+@state: light, @fragment
 
 #Support
 
+<img src="img/web_component/support.jpg" alt="" />
+
 ---
 @state: light
 
-# Use chrome canary
+## 使用chrome canary
 
-in chrome://flags
+<h4 style="color:#0099CC">in chrome://flags</h4>
+
 * experimental web platform features
 * experiental javascript
 * html imports
-* show shadow dom in developer tools
+
+
+<h4 style="color:#0099CC">in developer tools</h4>
+
+* show shadow dom
 
 ---
-@state: light
+@state: light, #fragment
 
-You can use it in ten years!
+## 啥时候可以用 ?
 
-No. 
 
-Today
+<h3 class="fragment today-trigger">十年内...</h3>
 
+<span class="today">Today</span>
 
 ---
 @state: light
@@ -556,18 +591,10 @@ Today
 * X-Tag
 
 ---
-@state: light
 
-# Polymer
+@state: blue
 
-Also a framework for building applications with web components.
-standard plus extension
-
-* web animations
-* pointer events
-* template binding
-* node.bind
-* mdv
+### The best way to predict the future is to create it
 
 ---
 
@@ -580,5 +607,5 @@ standard plus extension
 
 ## 资源
 
----
+请稍后......
 
