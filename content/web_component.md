@@ -1,6 +1,25 @@
 
 @bg: img/web_component/dinner.png
 # Good Evening
+
+---
+@state: light
+
+# 运行本PPT Demo
+
+## 请使用chrome canary
+
+<h4 style="color:#0099CC">in chrome://flags</h4>
+
+* experimental web platform features
+* experiental javascript
+* html imports
+
+
+<h4 style="color:#0099CC">in developer tools</h4>
+
+* show shadow dom
+
 ---
 @state: green, @fragment
 <style type="text/css">
@@ -360,7 +379,7 @@ button {
 ## Insertion point
 @state: light
 
-将Shadow host中的内容插入到Shadow dom中
+将Shadow host中的内容渲染时插入到Shadow dom中
 
 ---
 
@@ -603,9 +622,13 @@ document.register('tag-name', {
 ## Q&A
 
 ---
-@state: red
+@state: light
 
 ## 资源
 
-请稍后......
-
+* [Google Eric Bidelman's Slide about Web Component](https://html5-demos.appspot.com/static/webcomponents/index.html#1)
+* [O3noBlog about Web Component, including plentiful resources](http://thecssninja.com/talks/remote_debugging://blog.othree.net/log/2013/11/27/web-component/)
+* [A Guide to Web Component](http://css-tricks.com/modular-future-web-components/)
+* [Tracking the progress of Web Components](http://jonrimmer.github.io/are-we-componentized-yet/)
+* [Polymer homepage](http://www.polymer-project.org/)
+* [X-Tag homepage](http://www.x-tags.org/)

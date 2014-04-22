@@ -65,38 +65,38 @@
 
 ----------
 
-<section>
-    <h2>节流</h2>
-    <pre class="fragment">
-        <code style="font-size: 0.5em;">
-function throttle(fn, threshhold) {
-    var last = new Date(); 
-    return function() {
-        var context = this, 
-            args = arguments;
-        var now = new Date();
-        if(now - last >= threshhold) {
-            last  = now;
-            fn.apply(context, args);
-        }
-    };
-}
+## 节流
 
-$window.scroll(
-    throttle(function() {
-    // 滚动事件响应函数
-    }, 30）
-);
-        </code>
-    </pre>
-</section>
+```javascript
+
+    function throttle(fn, threshhold) {
+        var last = new Date(); 
+        return function() {
+            var context = this, 
+                args = arguments;
+            var now = new Date();
+            if(now - last >= threshhold) {
+                last  = now;
+                fn.apply(context, args);
+            }
+        };
+    }
+
+    $window.scroll(
+        throttle(function() {
+        // 滚动事件响应函数
+        }, 30）
+    );
+
+```
+
 
 ----------
 
-<section>
-    <h2>只改变视窗内的层</h2>
-    <pre class="fragment">
-        <code style="font-size:0.5em;">
+
+## 只改变视窗内的层
+
+```javascript
     var $parallax = $('.parallax-container'), 
         $window = $(window), 
         ratio = $parallax.data('ratio'),            // 滚动速率
@@ -114,9 +114,8 @@ $window.scroll(
             // $parallax.css('transform', 'translateY(' + -scrollTop + 'px)');
         }
     }, refreshInterval));
-    </code>
-    </pre>
-</section>
+```
+
 
 ----------
 
