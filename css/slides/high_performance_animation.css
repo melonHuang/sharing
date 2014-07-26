@@ -1,0 +1,124 @@
+.reveal .layer {
+    border: 1px solid #aaa;
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+    text-align: right;
+}
+
+.reveal .layer-html {
+    background: white;
+}
+
+.reveal .layer-body {
+    background: #F1F1F1;
+}
+
+.reveal .layer-p {
+    background: #FFFFD9;
+}
+
+.reveal .layer-div {
+    background: #FFFFD9;
+}
+
+.reveal .layer-img {
+    background: #faa;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    display: block;
+}
+
+.reveal .layer-paint {
+    background: white;
+}
+
+.reveal .layer-paint {
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+    text-align: right;
+    color: transparent;
+}
+
+.reveal .layer-paint-p {
+    background: #f88;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.reveal .layer-paint-p {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 36px;
+}
+
+/************************ bit map ********************************/
+.bitmap {
+    -webkit-animation: transfer 1s linear infinite;
+}
+
+@-webkit-keyframes transfer
+{
+from {
+    -webkit-transform:translate(-100px, -50px) rotate(1deg);
+}
+to {
+    -webkit-transform:translate(100px, -50px) rotate(360deg);
+}
+}
+
+/************************ bit map ********************************/
+.reveal .visible.texture-demo {
+    margin-top: 50px;
+    width: 180px;
+    height: 180px;
+    background: #f55;
+    margin: auto;
+    -webkit-animation: texturemove 3s linear infinite;
+}
+
+@-webkit-keyframes texturemove
+{
+0% {
+    opacity: 0.6;
+}
+25% {
+    -webkit-transform:translate(180px);
+}
+50% {
+    -webkit-transform:translate(180px) scale(0.5);
+}
+75% {
+    -webkit-transform:translate(180px) scale(0.5) rotate(45deg);
+}
+}
+
+/************************ bit map ********************************/
+.boundary {
+    color: #f55;
+}
+
+/************************ alert ********************************/
+.reveal .alert {
+    width: 40px;
+    vertical-align: middle;
+    position: relative;
+    left: 10px;
+    top: -5px;
+}
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 4.5px;
+}
+.node {
+  fill: #f44;
+}
+.node-name {
+  fill: #f44;
+  font-weight: bold;
+  font-size: 24px;
+}

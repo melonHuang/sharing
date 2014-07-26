@@ -55,19 +55,29 @@
     background: rgba(255, 255, 255, 0.5);
 }
 </style>
+
+<link rel="stylesheet" href="css/slides/high_performance_animation.css" />
+
 <div class="self-intro">
     <span class="avatar"></span>
     <h2 class="name">Melon.H</h2>
 </div>
+
 <ul class="contact-list">
-    <li>联盟@奇舞团.360</li>
-    <li>白羊座，爱好<i class="fa fa-music"></i>和运动</li>
+    <li>黄薇</li>
+    <li>360奇舞团</li>
     <li>
         <a href="http://blog.melonhuang.gitpress.org" style="color:white">Blog</a>
     </li>
     <li>
         <a href="http://75team.github.io/novaUI/" style="color:white">NovaUI</a>
     </li>
+    <p style="font-size:120%;margin-top:0.5em">
+        <a href="https://github.com/webzhao" target="_blank" title="Github"><i class="fa-github" style="color:white"></i></a>&nbsp;
+        <a href="http://www.flickr.com/photos/53827079@N06/" target="_blank" title="Flickr"><i class="fa-flickr" style="color:white"></i></a>&nbsp;
+        <a href="https://twitter.com/webzhao" target="_blank" title="Twitter"><i class="fa-twitter" style="color:white"></i></a>&nbsp;
+        <a href="http://cn.linkedin.com/pub/wenbo-zhao/29/7b1/514" target="_blank" title="Linkedin"><i class="fa-linkedin" style="color:white"></i></a>&nbsp;
+    </p>
 </ul>
 
 ---
@@ -90,7 +100,7 @@
 
 @state: light, @fragment
 
-# 性能
+## 性能
 
 <embed width="240" height="320" src="http://boallen.com/assets/flash/fps-compare/fps-compare-15fps.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" play="true" loop="true" scale="showall" wmode="window" devicefont="false" bgcolor="#1e1e1e" name="fps-compare-15fps" menu="true" allowfullscreen="false" allowscriptaccess="sameDomain" salign="" type="application/x-shockwave-flash">
 
@@ -98,191 +108,431 @@
 
 ---
 
-@state: light, @fragment
+@bg: img/high_performance_animation/bg.jpg
 
-# Render?
+<h1 style="display: inline-block; background: rgba(0, 0, 0, 0.7); padding: 30px 50px; border-radius: 10px;">渲染</h1>
+
+
+
+---
+
+@state: light
+
+## Devtool Timeline
+
+<img src="img/high_performance_animation/devtool2.png" alt="" />
 
 ---
 
 @state: light, @fragment
 
-# HTTP GET
+## HTML
+
+```markup
+<html>
+    <body>
+        <h1 style="display:none">Article</h1>
+        <p>Hi, I'm Banana</p>
+        <div>
+            <img src="example.png" alt="" />
+        </div>
+    </body>
+</html>
+```
 
 ---
 
 @state: light, @fragment
 
-# HTML
+## DOM
 
-<img src="img/high_performance_animation/html.jpg" alt="" />
+<div id="viz" style="height:300px"></div>
 
----
-
-@state: light, @fragment
-
-# DOM
-
-<img src="img/high_performance_animation/html.jpg" alt="" />
-<img class="fragment" src="img/high_performance_animation/parse.jpg" alt="" />
+<div class="fragment" style="position:absolute;top:40%;color:red;">
+    <img src="img/high_performance_animation/devtool3.png" alt="" />
+    <i class="fa fa-arrow-left fragment" style="font-size:40px;-webkit-transform:translate(-212px, -105px) scale(1.5, 1)"></i>
+</div>
 
 ---
 
 @state: light, @fragment
 
-# DOM + CSS = Render Tree
+### DOM + CSS = Render Tree
 
-<img class="fragment" src="img/high_performance_animation/parse.jpg" alt="" />
+<img class="fragment" src="img/high_performance_animation/render_tree.png" style="max-width: 85%;" alt="" />
 
+<div class="fragment" style="position:absolute;top:40%;color:red;">
+    <img src="img/high_performance_animation/devtool3.png" alt="" />
+    <i class="fa fa-arrow-left fragment" style="font-size:40px;-webkit-transform:translate(-196px, -88px) scale(1.5, 1)"></i>
+</div>
 
----
-
-@state: light, @fragment
-
-# Layout
-<img src="img/high_performance_animation/layout.jpg" alt="" />
-
----
-
-@state: light, @fragment
-
-# Paint
-<img src="img/high_performance_animation/paint.jpg" alt="" />
 
 
 ---
 
 @state: light, @fragment
 
-# Upload to GPU
+## Layout
 
-<img src="img/high_performance_animation/composite.jpg" alt="" />
+
+<div class="fragment layer layer-html">
+    HTML
+    <div class="fragment layer layer-body">
+        body
+        <div class="fragment layer layer-p">
+            p
+        </div>
+        <div class="fragment layer layer-div">
+            div
+            <div class="fragment layer layer-img">
+                img
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fragment" style="position:absolute;top:40%;color:red;">
+    <img src="img/high_performance_animation/devtool3.png" alt="" />
+    <i class="fa fa-arrow-left fragment" style="font-size:40px;-webkit-transform:translate(-256px, -69px) scale(1.5, 1)"></i>
+</div>
+
+---
+
+## Paint
+
+<div>
+<span style="font-size:20px;float:right;padding-right:5px;color:#f33;">bitmap</span>
+<div class="layer-paint" style="margin:0">
+    HTML
+    <div class="layer-paint">
+        body
+        <div class="layer-paint layer-paint-p">
+            <span>
+                Hi, I'm Banana. 
+            </span>
+        </div>
+        <div class="layer-paint">
+            div
+            <img src="img/high_performance_animation/minion.jpg" alt="" class="layer-img" />
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="fragment" style="position:absolute;top:40%;color:red;">
+    <img src="img/high_performance_animation/devtool3.png" alt="" />
+    <i class="fa fa-arrow-left fragment" style="font-size:40px;-webkit-transform:translate(-181px, -17px) scale(1.5, 1)"></i>
+</div>
+
 
 ---
 
 @state: light, @fragment
 
-# devtool waterfall
+## 传输到GPU，渲染到屏幕
+
+<div style="display:inline-block;font-size:20px;font-weight:bold;-webkit-transform: translateX(-100px);">
+    <img src="img/high_performance_animation/CPU.png" alt="" class="cpu" style="display:block;margin:0"/>
+    <span>CPU</span>
+</div>
+<img src="img/high_performance_animation/bitmap.png" alt="" class="bitmap" style="width:50px;"/>
+<div style="display:inline-block;font-size:20px;font-weight:bold;-webkit-transform: translateX(100px);">
+    <img src="img/high_performance_animation/GPU.png" alt="" class="cpu" style="display:block;margin:0"/>
+    <span>GPU</span>
+</div>
+
+<div class="fragment" style="position:absolute;top:40%;color:red;">
+    <img src="img/high_performance_animation/devtool4.png" alt="" />
+    <i class="fa fa-arrow-left fragment" style="font-size:40px;-webkit-transform:translate(-131px, -24px) scale(1.5, 1)"></i>
+</div>
+
+---
+
+@state: light
+
+## 渲染过程 
 <img src="img/high_performance_animation/devtools-waterfall.jpg" alt="" />
 
 ---
 
-@state: light, @fragment
+@state: light
 
-# 引起layout的style
+### CSS style 影响
 
-<img src="img/high_performance_animation/layout_styles.jpg" alt="" />
+<img src="img/high_performance_animation/statistic.png" alt="" />
 
-* Source: [http://goo.gl/IPVJY6](https://docs.google.com/spreadsheet/pub?key=0ArK1Uipy0SbDdHVLc1ozTFlja1dhb25QNGhJMXN5MXc&single=true&gid=0&output=html)
-
----
-
-@state: light, @fragment
-
-# Reading也会引起layout
-
-*clientHeight, clientLeft, clientTop, clientWidth, focus(), getBoundingClientRect(), getClientRects(), innerText, offsetHeight, offsetLeft, offsetParent, offsetTop, offsetWidth, outerText, scrollByLines(), scrollByPages(), scrollHeight, scrollIntoView(), scrollIntoViewIfNeeded(), scrollLeft, scrollTop, scrollWidth .....
 
 ---
 
 @state: light, @fragment
 
-# render process
-<img src="img/high_performance_animation/devtools-waterfall.jpg" alt="" />
+## 渲染小结
 
-* 改变发生再这个过程的越早，越耗时
-* 改变不同样式会导致layout/repaint/composite
-* 读取size, position相关属性会引起relayout
+* 渲染主要三阶段：Layout计算范围，Paint计算展现，Composite合成Bitmap
+* 修改不同CSS属性会触发不同阶段
+* 触发的阶段越前，渲染的代价越高
+
+---
+
+@bg: img/high_performance_animation/rocket.jpg
+
+# 硬件加速
 
 ---
 
 @state: light, @fragment
 
-# 丝柔顺滑的Animation
+## GPU
 
-* to us: 30fps feels good, 60fps is perfect
-* 屏幕刷新频率: mostly 60, 部分国家50
-* 丝柔顺滑意味着：1 / 60s ~= 16.7ms内，我们要把这一帧准备好。
+* 术语：texture。可看做一个放在GPU上的位图
+* GPU擅长对texture进行偏移，放大缩小，旋转，更改透明度
+
+<div class="texture-demo fragment"></div>
 
 ---
 
 @state: light, @fragment
 
-# setTimeout(callback, 16.7);
+## Layer 模型
 
-* Bad!
-* 精确度不够。依靠浏览器内置时钟更新频率. eg. IE8及以前更新间隔为15.6, setTimeout 16.7, 它需要两个15.6ms才触发。超过14.5ms
+* 浏览器根据CSS属性为元素生成Layers
+* 将Layers作为texture上传到GPU
+* 当改变Layer的transform, opacity属性时，渲染会跳过Layout, paint，直接通知GPU对Layer做变换。
+
+---
+
+@state: light, @fragment
+
+## Layer触发条件
+
+* 3d或perspective transform属性
+* 使用animation, transition改变opacity, transform的元素
+* video 
+* canvas
+* flash
+* CSS filters
+* 覆盖在Layer上的元素
+
+---
+
+@state: light
+
+### 为什么使用硬件加速实现动画快？
+<img src="img/high_performance_animation/rocket.png" alt="" />
+
+---
+
+@state: light
+
+## Animate top
+
+---
+
+@state: light
+
+<img src="img/high_performance_animation/animate-height-2x.png" alt="" />
+
+---
+
+@state: light
+
+## Animate transform
+
+
+---
+
+@state: light
+
+<img src="img/high_performance_animation/animate-transform-2x.png" alt="" />
+
+---
+
+@state: light
+
+<img src="img/high_performance_animation/animate-height-2x.png" alt="" width="46%" style="vertical-align:top"/>
+<img src="img/high_performance_animation/animate-transform-2x.png" alt="" width="46%" style="vertical-align:top"/>
+
+---
+
+@state: light, @fragment
+
+## 节省了哪些时间？
+
+* CPU进行Layout, Paint的时间
+* CPU向GPU传输位图的时间
+
+---
+
+@bg: img/high_performance_animation/hair.jpg
+
+<h2 style="line-height: 1.3">
+丝柔顺滑的<br />Animation
+</h2>
+
+---
+
+@state: light, @fragment
+
+## 流畅，对我们而言?
+
+<embed width="240" height="320" style="margin-bottom:20px" src="http://boallen.com/assets/flash/fps-compare/fps-compare-30fps.swf" quality="high" bgcolor="#1e1e1e" width="240" height="320" name="fps-compare-30fps" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+
+
+<embed width="240" height="320" style="margin-bottom:20px" src="http://boallen.com/assets/flash/fps-compare/fps-compare-60fps.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" play="true" loop="true" scale="showall" wmode="window" devicefont="false" bgcolor="#1e1e1e" name="fps-compare-60fps" menu="true" allowfullscreen="false" allowscriptaccess="sameDomain" salign="" type="application/x-shockwave-flash">
+
+* 对我们的眼睛来说：30FPS+感觉流畅，60FPS更舒服完美
+
+---
+
+@state: light, @fragment
+
+## 屏幕刷新频率 
+
+* 不同国家屏幕刷新频率规格不同，有的国家的为60FPS, 部分国家，如UK，为50FPS
+* 大部分都是60FPS
+
+---
+
+@state: light, @fragment
+
+## 丝柔顺滑意味着：
+
+* 在1 / 60FPS, 约等于16.7ms内，我们要把这一帧准备好。
+
+---
+
+@state: light, @fragment
+
+## 两个问题：
+
+1. 开始绘制的时机
+2. 绘制一帧的时间
+
+---
+
+@state: light, @fragment
+
+## 绘制的时机
+
+* setTimeout(callback, 1/60);
+
+<img src="img/high_performance_animation/bad.png" alt="" />
+
+---
+
+@state: light, @fragment
+
+## setTimeout不够精确
+
+* 依靠浏览器内置时钟更新频率. eg. IE8及以前更新间隔为15.6, setTimeout 16.7, 它需要两个15.6ms才触发。超过14.5ms
 * main thread队列
-* 不同刷新频率得屏幕
 
 ---
 @state: light, @fragment
 
-# setTimeout(callback, 16.7);
+## 丢帧了
 
-<img src="img/high_performance_animation/settimeout.png" alt="" />
-* 丢帧！
+<iframe src="demos/high_performance_animation/fps.html" style="width: 100%; height: 280px"></iframe>
 
 ---
 
 @state: light, @fragment
 
-# requestAnimationFrame - when to paint
+## requestAnimationFrame
 
-* 定义绘制每一帧前的工作
-* 自动调节频率。js, layout, paint过程工作太多，会自动降低为30fps, 虽然频率降低但比丢帧好。 
-
----
-
-@state: light, @fragment
-
-# half the way
-
-* rAF解决了timing得问题
-* 到frame budget了。小于16.7ms
+* 定义绘制每一帧前的工作。 `requestAnimationFrame(callback)`
+* 自动调节频率。callback工作太多无法在一帧内完成，会自动降低为30FPS, 虽然频率降低但比丢帧好。 
 
 ---
 
 @state: light, @fragment
 
-# render process
+## 渲染时机 
+
+* requestAnimationFrame
+
+<img src="img/high_performance_animation/good.png" alt="" />
+
+---
+
+@state: light, @fragment
+
+## 渲染一帧的时间 
+
+<h3>目标：<span class="boundary">16ms-</span></h3>
+
+---
+
+@state: light
+
+## 渲染过程 
 <img src="img/high_performance_animation/devtools-waterfall.jpg" alt="" />
 
 ---
 
+@state: light
+
+## Layout 
+<img src="img/high_performance_animation/layout.png" alt="" />
+
+---
+
 @state: light, @fragment
 
-# 触发Layout
+## 触发Layout
 
 * 更改class，导致width, height, margin等size, position相关得属性改变。
-* 读取size, position相关得属性
+* 读取size, position相关得属性<img class="alert" src="img/high_performance_animation/alert.png" alt="" />
 
 ---
 
 @state: light, @fragment
 
-# Layout thrashing: demo
+## 读取这些属性会引起layout
 
-http://www.html5rocks.com/en/tutorials/speed/rendering/too-much-layout.html
-http://www.html5rocks.com/en/tutorials/speed/rendering/too-much-layout-fixed.html
+clientHeight, clientLeft, clientTop, clientWidth, focus(), getBoundingClientRect(), getClientRects(), innerText, offsetHeight, offsetLeft, offsetParent, offsetTop, offsetWidth, outerText, scrollByLines(), scrollByPages(), scrollHeight, scrollIntoView(), scrollIntoViewIfNeeded(), scrollLeft, scrollTop, scrollWidth .....
+
+<img src="img/high_performance_animation/bombo.png" alt="" />
 
 
 ---
 
 @state: light, @fragment
 
-## 分离读写操作 
+### 尽量不触发Layout
+
+* 使用transform代替top, left的动画
+
+---
+
+
+@state: light, @fragment
+
+###  频繁Layout
 
 ```javascript
-var h1 = element1.clientHeight;
-element1.style.height = (h1 * 2) + 'px';
+var h1 = element1.clientHeight;              
+element1.style.height = (h1 * 2) + 'px';   // 引起Layout
 
-var h2 = element2.clientHeight;
-element2.style.height = (h2 * 2) + 'px';
+var h2 = element2.clientHeight; 
+element2.style.height = (h2 * 2) + 'px';   // 引起Layout
 
 var h3 = element3.clientHeight;
-element3.style.height = (h3 * 2) + 'px';
+element3.style.height = (h3 * 2) + 'px';   // 引起Layout
 
 ```
+
+---
+
+@state: light, @fragment
+
+<img src="img/high_performance_animation/before.png" alt="" />
+
+---
+
+@state: light, @fragment
+
+### 分离读写操作 
 
 ```javascript
 // Read
@@ -290,7 +540,7 @@ var h1 = element1.clientHeight;
 var h2 = element2.clientHeight;
 var h3 = element3.clientHeight;
 
-// Write (invalidates layout)
+// Write
 element1.style.height = (h1 * 2) + 'px';
 element2.style.height = (h2 * 2) + 'px';
 element3.style.height = (h3 * 2) + 'px';
@@ -299,9 +549,10 @@ element3.style.height = (h3 * 2) + 'px';
 
 ---
 
+
 @state: light, @fragment
 
-# What if?
+# 囧 
 
 ```javascript
 document.body.addEventListener('click', function() {
@@ -328,17 +579,14 @@ document.body.addEventListener('click', function() {
 document.body.addEventListener('click', function() {
     // Read
     var h1 = element1.clientHeight;
-
     // Write
     requestAnimationFrame(function() {
       element1.style.height = (h1 * 2) + 'px';
     });
 });
-
 document.body.addEventListener('click', function() {
   // Read
   var h2 = element2.clientHeight;
-
   // Write
   requestAnimationFrame(function() {
     element2.style.height = (h2 * 2) + 'px';
@@ -351,7 +599,7 @@ document.body.addEventListener('click', function() {
 
 @state: light, @fragment
 
-# wirte后Read
+### wirte后read肿么办？
 
 ```javascript
 // Read
@@ -359,13 +607,12 @@ var h1 = element1.clientHeight;
 
 // Write
 requestAnimationFrame(function() {
-  element1.style.height = (h1 * 2) + 'px';
+    element1.style.height = (h1 * 2) + 'px';
 
-    // We may want to read the new
-    // height after it has been set
-    var height = element1.clientHeight;
+    // 我们可能希望write后再read其他元素的属性
+    var height = element2.clientHeight;
 
-    /*
+    /* 异步读取，可能读取前element1.style.height被修改  
     requestAnimationFrame(function() {
         var height = element1.clientHeight;
     });
@@ -373,13 +620,11 @@ requestAnimationFrame(function() {
 });
 ```
 
-* 用requestAnimationFrame推迟read操作，但可能导致read这一帧之前, element.style.height被修改了。
-
 ---
 
 @state: light, @fragment
 
-# fastdom
+## fastdom.js
 
 ```javascript
 // Read
@@ -401,134 +646,96 @@ fastdom.write(function() {
 
 ---
 
-@state: light, @fragment
+## Layout小结
 
-# Demo
-
-http://jsbin.com/ebicuJu/2/edit
-
----
-
-# 少触发Layout
-
-* 避免多次读取，保存代替读取
-* 批量读，批量写
-* 面对解耦代码，使用rAF推迟达到批量度，批量写得效果。
+* 不但改变CSS可能导致Layout，读取位置大小相关得属性也会导致Layout
+* 分离读写，减少Layout
+* 面对解耦代码，使用rAF推迟的方法分离读写。
 
 @state: light, @fragment
 
 ---
 
-@state: light, @fragment
+@state: light
 
-# Paint
+## Paint
+<img src="img/high_performance_animation/paint2.png" alt="" />
 
-* 当修改border-radius, box-shadow, color等属性时，会引起repaint
+---
+
+@state: light
+
+## 触发Paint
+
+* 当修改border-radius, box-shadow, color等展示相关属性时，会触发paint
 
 ---
 
 @state: light, @fragment
 
-# Paint can be expensive
+### Paint的代价 
 
-* demo: background: fixed, box-shadow, border-radius
-* use continuous painting mode in devtool
-* 在经常Repaint得区域，要避免代价太高得style
+* [demo](demos/high_performance_animation/paint.html)
+* continuous painting mode
+* 在经常paint的区域，要避免代价太高的style
 
 ---
 
 @state: light, @fragment
 
-# Paint区域越小越好
+### 减少不必要的Paint
 
-* gif jank: http://jsbin.com/dizak/1/edit 即使gif不可见，浏览器也会一直repaint，因为这个代驾比计算它是否可见小。所以记得把gif给display:none;
-
-* 改变一个元素，不只是它会被Repaint，它所处得整个层都会被repaint
-* show paint-rectangles
-
----
-
-# Paint
-
-* 不同style得paint代价不同，刷新频繁得区域避免使用这些style
-* 避免不必要得painting, 如隐藏得gif
-* 尽量使paint的区域小
+* [Gif Demo](http://jsbin.com/dizak/3/edit)
+* gif图即使被其他Layer盖住不可见，也可能导致paint，不需要时应将gif图的display属性设为none。
 
 ---
 @state: light, @fragment
 
-# Composite
+### 减小Paint的区域
 
-* GPU工作时刻，擅长改变Layer得position, scale, opacity, rotation
-
----
-@state: light, @fragment
-
-# Layer model
-
-* show composited layers
-* layer panel
+* [Demo](http://www.html5rocks.com/static/demos/scrolling/demo.html#)
+* 为引起大范围Paint的元素生成独立的Layer以减小Paint的范围
 
 ---
 @state: light, @fragment
 
-# 如何生成Layer
+## Paint小结
 
-* 3d或perspective transform属性
-* 使用animation改变opacity, transform得元素
-* video 
-* canvas
-* flash
-* accelerated CSS filters
-* 上面被Layerf覆盖得元素
+* 不同CSS Style的paint代价不同，刷新频繁的区域应避免使用这些style
+* 避免不必要的painting, 如藏在底下默默repaint的gif图
+* 通过生成Layer, 尽量减小paint的区域
+
+---
+@state: light
+
+## Composite
+<img src="img/high_performance_animation/screen.png" alt="" />
 
 ---
 @state: light, @fragment
 
-## 动画，将height从100px不断修改为200px
+## GPU也是有限度的
+<img src="img/high_performance_animation/angry.png" alt="" />
 
-<img src="http://img.readitlater.com/i/blogs.adobe.com/webplatform/files/2014/03/animate-height-2x/RS/w640.png" alt="" />
-
----
-@state: light, @fragment
-
-## 动画，将scale从0.5变化到1
-
-<img src="http://img.readitlater.com/i/blogs.adobe.com/webplatform/files/2014/03/animate-transform-2x/RS/w640.png" alt="" />
 
 ---
 @state: light, @fragment
 
-# 生成Layer来减小repaint得区域
-## demo
-http://www.html5rocks.com/static/demos/scrolling/demo.html
+### 避免意外生成layer
+
+* [demo](http://jsbin.com/efirip/5/quiet)
+* z-index高于Layer的元素，也会生成单独的Layer
 
 ---
 @state: light, @fragment
 
-# GPU也是有限度得
+## Composite小结
 
-demo: taobao.com
-
-* 如果生成太多layer，GPU会忙不过来，也会卡顿
-
----
-@state: light, @fragment
-
-# 避免意外生成layer
-
-demo: http://jsbin.com/efirip/5/quiet
+* GPU也是有限度的，不要滥用GPU资源生成不必要的Layer
+* 留意意外生成的Layer
 
 ---
-@state: light, @fragment
 
-# Composite
-
-1. GPU擅长改变position(translate), opacity, rotation, scale。如果能使用这些属性做动画尽量使用，避免layout。
-2. 为最小化paint得区域，可为导致repaint得区域生成新得层来达到效果
-3. GPU也是有限度的，不要生成太多无用得Layer，也要避免代码中意外产生Layer。
-
----
 @state: light, @fragment
 
 # Scroll
@@ -536,7 +743,7 @@ demo: http://jsbin.com/efirip/5/quiet
 ---
 @state: light, @fragment
 
-# 避免在Scroll callback中做太多操作
+### 将样式操作从scroll事件中剥离 
 
 ```javascript
 var latestKnownScrollY = 0,
@@ -554,16 +761,11 @@ function requestTick() {
     ticking = true;
 }
 function update() {
-    // reset the tick so we can
-    // capture the next onScroll
     ticking = false;
 
     var currentScrollY = latestKnownScrollY;
 
-    // read offset of DOM elements
-    // and compare to the currentScrollY value
-    // then apply some CSS classes
-    // to the visible items
+    // 更改样式
 }
 
 ```
@@ -571,57 +773,63 @@ function update() {
 ---
 @state: light, @fragment
 
-# hover jank
+### scroll过程中hover的代价 
 
-https://dl.dropboxusercontent.com/u/2272348/codez/expensivescroll/demo.html
+* [demo](https://dl.dropboxusercontent.com/u/2272348/codez/expensivescroll/demo.html)
 
-* event-pointer: none;
+* 开始滚动后通过event-pointer: none禁止鼠标行为，减少不必要的repaint。
 
 ---
 @state: light, @fragment
 
-# touch jank
+### 绑定touch事件给Scroll带来的副作用
 
-* 当滚动时，browser会等待touchmove callback完成后，才能决定是否滚动。因此touchmove handler会阻塞scrolling
-* pointer-event, touch-action:none; 告诉你这块区域没有绑定touch事件，这样浏览器滚动不会被main thread阻塞
-* 有的浏览器做优化，如果区域没绑定touch事件，就不等待main thread。
-* 因此不要在不需要touchevent得区域绑定事件, 尤其是document
+* [demo](http://www.rbyers.net/janky-touch-scroll.html)
+* 滚动时，browser会等待touchmove的回调函数完成后，才能决定是否滚动。因此touchmove handler会阻塞默认滚动。
+* 使用css属性touch-action:none，避免阻塞 
+* 有的浏览器了做优化，如果区域没绑定touch事件，就不会被js阻塞。
+* 因此不要在不需要touchevent的区域绑定事件, 尤其是document。
 * mousewheel同理
-* show scroll bottle neck
 
-demo: http://www.rbyers.net/janky-touch-scroll.html
+---
+@state: green
+
+# Q&A
+
 
 ---
 @state: light, @fragment
 
-# Checklist
+## Checklist
 
-* large invalidations of layouts and styles 
-* layout thrashing
-* animating layout properties
-* Paint storms
-* expensive paints
-* expensive input handlers
+* 频繁触发Layout 
+* 对会触发Layout的属性做动画
+* 大范围的paint
+* 昂贵的paint
+* scroll, hover等用户交互引起的代价 
+* 避免在动画过程中触发垃圾回收
 
 ---
-@state: light, @fragment
+@state: blue, @fragment
 
-# dont't follow it, test it
+### 实践是检验真理的唯一标准 
 
 * timeline
 * show paint rectangles
 * show composite layer borders
 * continuous painting mode
-* show bottleneck
-
----
-@state: light, @fragment
-
-# Q&A
-
+* show scroll bottleneck
 ---
 
-@state: light, @fragment
+@state: red
+
+### Resources 
+
+* [jankfree](http://jankfree.org/) 
+
+---
+
+@state: green, @fragment
 
 # THANKS 
 

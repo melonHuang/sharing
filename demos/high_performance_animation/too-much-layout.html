@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <title>JS Bin</title>
+        <style>
+            html {
+                font: 14px Helvetica, sans-serif;
+                background: black;
+                color: white;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin-bottom: 1rem;
+            }
+
+            h1,
+            p {
+                max-width: 400px;
+            }
+
+            h1 {
+                font-size: 3em;
+                //word-break: break-word;
+                -webkit-hyphens: auto;
+            }
+
+            div {
+                float: left;
+                width: 25%;
+                margin: 0;
+                background: white;
+                border: solid 2px black;
+            }
+
+            section {
+                overflow: hidden;
+            }
+
+            #speed {
+                font-size: 2.4em;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Prevent layout thrashing with requestAnimationFrame</h1>
+        <p>In this example we are carrying out the task of setting heights of four divs on the page based on their width. <strong>We've solved the problem in two ways:</strong></p>
+        <p><strong>The first</strong> is less performant because it causes the DOM to reflow 4 times by reading and writing in quick succession.</p>
+        <p><strong>The second</strong> makes use of requestAnimationFrame to schedule all DOM writes for the next frame. This means that all the reads happen together, followed by all the writes, and our layout doesn't get 'thrashed' :)</p>
+        <p>Run timeline in DevTools and observe the number of layouts event that occur for each solution.</p>
+        <section>
+        <button id="thrash">With layout thrash</button>
+        <button id="nothrash">Without layout thrash</button>
+        <section id="speed"></section>
+        <section>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        </section>
+        <script> 
+            var divs = document.querySelectorAll('div');
+            var raf = window.requestAnimationFrame;
+            var each = [].forEach;
+            var now = function() {
+                return performance
+                ? performance.now()
+                : Date.now();
+            };
+
+            /**
+            * Thrashing solution
+            */
+
+            thrash.onclick = function() {
+                reset();
+
+                var start = now();
+
+                // Loop each div
+                each.call(divs, function(div) {
+                    var width = div.clientWidth;
+                    div.style.height = width + 'px';
+                });
+
+                // Render result
+                renderSpeed(now() - start);
+            };
+
+            /**
+            * Non-thrashing solution
+            */
+
+            nothrash.onclick = function() {
+                reset();
+
+                var start = now();
+
+                // Loop each div
+                each.call(divs, function(div) {
+                    var width = div.clientWidth;
+
+                    // Schedule the write
+                    // operation to be run
+                    // in the next frame.
+                    raf(function() {
+                        div.style.height = width + 'px';
+                    });
+                });
+
+                // Render result
+                raf(function() {
+                    renderSpeed(now() - start);
+                });
+            };
+
+            // Resets the divs
+            function reset() {
+                each.call(divs, function(div) {
+                    div.style.height = '';
+                    div.offsetTop;
+                });
+            }
+
+            function renderSpeed(ms) {
+                speed.textContent = ms + 'ms';
+            }
+        </script>
+    </body>
+</html>

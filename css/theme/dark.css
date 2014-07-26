@@ -238,14 +238,14 @@ body {
  * code
  *********************************************/
 .reveal pre {
-    font-size: 1em;
+    font-size: .8em;
     line-height: 1.25;
     font-family: Consolas;
     margin: 1em auto;
     position: relative;
 }
 .reveal pre code {
-    font-family: Consolas;
+    //font-family: Consolas;
     padding: 0;
 }
 .reveal .run-btn {

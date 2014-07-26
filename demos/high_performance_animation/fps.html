@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)http://www.html5rocks.com/en/tutorials/speed/rendering/raf-motivation.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+    <title>Why rAf Matters</title>
+    <style>
+      * {
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-size: 16pt;
+        color: #797979;
+      }
+      h1 {
+        font-size: 16pt;
+      }
+      #a, #b, #c {
+        margin-bottom: 20px;
+      }
+      div.label {
+        margin-bottom: 0.6em;
+      }
+    </style>
+  <style type="text/css"></style></head>
+  <body data-pinterest-extension-installed="cr1.3.3" cz-shortcut-listen="true">
+    <div id="a">
+      <div class="label">
+        <label for="display-refresh">Display refresh rate:</label>
+        <input id="display-refresh" type="range" min="50" max="70" value="60" step="1">
+        (<span id="cur-display-refresh">60</span> Hz)
+      </div>
+      <canvas id="canvas0" width="5000" height="40"></canvas>
+    </div>
+
+    <div id="b" style="display:block">
+      <div class="label">
+        <label for="interval">setTimeout interval:</label>
+        <input id="interval" type="range" min="6" max="20" value="16" step="1">
+        (<span id="cur-interval">16</span> ms)
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+      </div>
+      <canvas id="canvas1" width="5000" height="60"></canvas>
+    </div>
+
+    <script>
+      function line(ctx, x1, y1, x2, y2, color) {
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x2,y2);
+        ctx.stroke();
+      }
+      function arrow(ctx, x1, y1, x2, y2, color) {
+        line(ctx, x1, y1, x2, y2, color);
+        var dx = x2 - x1;
+        var dy = y2 - y1;
+        var len = Math.sqrt(dx * dx + dy * dy);
+        var perc = (len - 10) / len;
+        var bx = x1 + perc * dx;
+        var by = y1 + perc * dy;
+        var ux = dx / len;
+        var uy = dy / len;
+        var ax = uy * 5;
+        var ay = -ux * 5;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(bx + ax, by + ay);
+        ctx.lineTo(x2, y2);
+        ctx.lineTo(bx - ax, by - ay);
+        ctx.lineTo(bx + ax, by + ay);
+        ctx.fill();
+      }
+
+      function niceRect(ctx, x, y, w, h, text) {
+        ctx.fillStyle = 'rgba(255,255,255,0.75)';
+        ctx.fillRect(x, y, w, h);
+
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.strokeRect(x, y, w, h);
+
+        var tw = ctx.measureText(text).width;
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(0,0,0,1)';
+        ctx.fillText(text, x + 0.5 * w - 0.5 * tw, y + 0.5 * h);
+      }
+
+      function redraw() {
+        var canvas0 = document.querySelector('#canvas0');
+        var w = canvas0.width;
+        var h0 = canvas0.height;
+
+        var ctx0 = canvas0.getContext('2d');
+        ctx0.clearRect(0, 0, w, h0);
+
+
+        var canvas1 = document.querySelector('#canvas1');
+        if (canvas1.width != canvas0.width)
+          canvas1.width = canvas0.width;
+        var h = canvas1.height;
+        var ctx = canvas1.getContext('2d');
+        ctx.clearRect(0, 0, w, h);
+
+
+        var px_per_ms = 60 / (1000 / 60);
+        var cur_vsync = document.querySelector('#display-refresh').value;
+        document.querySelector('#cur-display-refresh').textContent = cur_vsync;
+        var vsync_width = (1000 / cur_vsync) * px_per_ms;
+
+        var N = Math.ceil(w / vsync_width);
+        var current_interval = document.querySelector('#interval').value;
+        document.querySelector('#cur-interval').textContent = current_interval;
+
+        var cur_interval_width = current_interval * px_per_ms;
+        var M = Math.ceil(w / cur_interval_width);
+
+        for (var i = 0; i < N; i++)
+          line(ctx0, i*vsync_width, 0, i*vsync_width, h, 'rgba(0,0,255,1.0)');
+
+        for (var i = 0; i < N; i++)
+          line(ctx, i*vsync_width, 0, i*vsync_width, h, 'rgba(0,0,255,1.0)');
+
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(0,0,0,1)';
+        ctx.textBaseline = 'top';
+        if (current_interval < 14)
+          ctx.font = '10px sans-serif';
+        else
+          ctx.font = '16px sans-serif';
+        //ctx.fillText('display refreshes', 0, 0);
+
+        //arrow(ctx,50,20, vsync_width * 1, 30, 'rgba(0,0,255,0.75)');
+        //arrow(ctx,50,20, vsync_width * 2, 30, 'rgba(0,0,255,0.75)');
+        //arrow(ctx,50,20, vsync_width * 5, 30, 'rgba(0,0,255,0.75)');
+
+        for (var i = 0; i < M; i++) {
+          var doneAt = (i+1)*cur_interval_width - 4;
+          var nearestVSync = Math.ceil(doneAt / vsync_width) * vsync_width;
+
+          var nextDoneAt = (i+2)*cur_interval_width - 4;
+          var nextNearestVSync = Math.ceil(nextDoneAt / vsync_width) * vsync_width;
+
+          var c;
+          if (nearestVSync == nextNearestVSync)
+            c = 'rgba(255, 0, 0, 0.75)';
+          else
+            c = 'rgba(0, 0, 0, 0.75)';
+
+          if (current_interval < 10.5)
+            suffix = ''
+          else
+            suffix = 'ms';
+          niceRect(ctx, i*cur_interval_width, 10, cur_interval_width - 3, 30, current_interval + suffix);
+          arrow(ctx, doneAt, 40, nearestVSync, 59, c);
+
+          if (nearestVSync == nextNearestVSync) {
+            ctx.lineWidth = 3;
+            line(ctx, i*cur_interval_width, 15, i*cur_interval_width + cur_interval_width - 4, 45, 'rgba(255, 0, 0, 0.75)');
+            line(ctx, i*cur_interval_width, 45, i*cur_interval_width + cur_interval_width - 4, 15, 'rgba(255, 0, 0, 0.75)');
+            ctx.lineWidth = 1;
+          }
+        }
+      }
+
+      redraw();
+      document.querySelector('#display-refresh').addEventListener('change', redraw);
+      document.querySelector('#interval').addEventListener('change', redraw);
+    </script>
+  
+
+<div id="chrome-hosts-manager-ipaddr" title="当前标签页IP：点击隐藏">127.0.0.1</div><span style="height: 20px; width: 40px; min-height: 20px; min-width: 40px; position: absolute; opacity: 0.85; z-index: 8675309; display: none; cursor: pointer; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAADU0lEQVR42s2WXUhTYRjHz0VEVPRFUGmtVEaFUZFhHxBhsotCU5JwBWEf1EWEEVHQx4UfFWYkFa2biPJiXbUta33OXFtuUXMzJ4bK3Nqay7m5NeZq6h/tPQ+xU20zugjOxR/+7/O8539+5znnwMtNTExwJtMb3L/fiLv3botCSmUjeCaejTOb39AiFothfHxcFIrHY8RksZjBsckJcOIRMfFsHD/SsbExUYpnI8DR0dGUGjSb0byhEJp5Uqg5CTSzc2CQleJbMEj9/ywBcGRkJEk9DQqouEVQT1sK444yWI9UonmTjGqauVLEIlHa9x8lAMbj8SSpp0rwKGMVvg8P46vbg0C7na8z8JsMcgHe7jlEa+edRhiLy8n/TUMfu6EvLElk+U0WtGwrTrdfAGQf5J8iiK4LVzDU28t8JtMSocf8E+l68myaNFXm/6rXslLK7ay5TOunuRvZWpJuvwAYjUaTpOIWoquuAZ219RTaxKYp9BbjycoN5FvL9qH9TBX5rvoGdJythvXYSTxdtRnWylO/ZdqrLsGwszzhWQ593z2KlAwCYCQSSZJ6ehZ0W7bD9VBLgN0NCqr3qR7R2rBrL3pu3Sb/7nDlz2uy6cG0OXk0GTbZXzNp8trsPAQdTj6frlWzN2DcXZGKQQAMh8NJ6rpyHe+PnkCr/CAFdZyvpfpjuvkifLF9wIt1Wwlo0OHie1RvWrKa93RjzfzliTzPKz3ltB0/Tevmwp14wGUgHAzSOoUEwFAolFaaBSuhnslPRkJexUJtZ6v5HtUeLswl33n1BgEY5fvhs9sJ3FAiT+QYyyvoAQJuD0KBAFRTJNAuz5/s3gJgMBhMJwrVFRThM5tY5zUF/A4X1f2fvQTRLCuBreoim0YmAbqNJryvPEXeeq46kaNdkQ/1HCncbJKPs9ZSv2VHGfWsZ2hfkhKAfr8/pdxWKx4wwD69PmVfNSOL+lr2w+gYqHpWDtXt1xQ8AMlWU0e1lqLd/APRHoP8AJqWrQG9gYxcPMsvSJUvAA4MDKTUJ7MZLaVy8v+qT21tcDx/OemePr0RTkNrur4A6PP5xCgBsL+/X4wiQDpuuVxOeL1eMYmYeDY6sOp0z+B0OuHxeEQhxkJMFosJiSO/UinOI/8Pc+l7KKArAT8AAAAASUVORK5CYII=);"></span></body></html>
