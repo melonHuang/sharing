@@ -73,10 +73,9 @@
         <a href="http://75team.github.io/novaUI/" style="color:white">NovaUI</a>
     </li>
     <p style="font-size:120%;margin-top:0.5em">
-        <a href="https://github.com/webzhao" target="_blank" title="Github"><i class="fa-github" style="color:white"></i></a>&nbsp;
-        <a href="http://www.flickr.com/photos/53827079@N06/" target="_blank" title="Flickr"><i class="fa-flickr" style="color:white"></i></a>&nbsp;
-        <a href="https://twitter.com/webzhao" target="_blank" title="Twitter"><i class="fa-twitter" style="color:white"></i></a>&nbsp;
-        <a href="http://cn.linkedin.com/pub/wenbo-zhao/29/7b1/514" target="_blank" title="Linkedin"><i class="fa-linkedin" style="color:white"></i></a>&nbsp;
+        <a href="https://github.com/melonHuang" target="_blank" title="Github"><i class="fa-github" style="color:white"></i></a>&nbsp;
+        <a href="http://weibo.com/u/2103102591" target="_blank" title="Weibo"><i class="fa-weibo" style="color:white"></i></a>&nbsp;
+        <a href="https://twitter.com/melonh0327" target="_blank" title="Twitter"><i class="fa-twitter" style="color:white"></i></a>&nbsp;
     </p>
 </ul>
 
