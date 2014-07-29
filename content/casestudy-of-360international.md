@@ -349,7 +349,7 @@
         <li class="fragment">Chrome等浏览器对icon font解析得不够平滑，边缘有小锯齿<span class="icon" data-icon="e" style="font-size: 2em;margin-left: 20px;vertical-align:middle"></span></li>
         <li class="fragment">只支持纯色icon</li>
         <li class="fragment">制作麻烦，在自定义字体库中添加字体时需重新制作字体文件</li>
-        <li class="fragment">为防止盗用字体，IE和FF浏览器有垮与策略。跨域请求字体文件需在http header中设置Access-Control-Allow-Orig</li>
+        <li class="fragment">为防止盗用字体，IE和FF浏览器有跨域策略。跨域请求字体文件需在http header中设置Access-Control-Allow-Orig</li>
     </ul>
 </section>
 
