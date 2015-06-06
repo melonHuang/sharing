@@ -422,16 +422,15 @@ window.addEventListener("orientationchange", function() {
 ## touchEvent
 
 * 有三个touchList类型的关键属性
-* touchList里的每一项结构域MouseEvent类似
+* touchList里的每一项结构与MouseEvent类似
 ```javascript
 window.ontouchstart = function(e) {
-    var touchList = e.touchList;
-    console.log(touchList.touches); // 屏幕上所有手指
-    console.log(touchList.targetTouches); // 当前元素上的手指
-    console.log(touchList.changedTouches); // 有变化的手指
+    console.log(e.touches); // 屏幕上所有手指
+    console.log(e.targetTouches); // 当前元素上的手指
+    console.log(e.changedTouches); // 有变化的手指
 
-    console.log(touchList.changedTouchs[0].clientX);  // 获得第一个手指相对于视觉视口的横向偏移
-    console.log(touchList.changedTouchs[0].pageX);  // 获得第一个手指相对于布局视口的横向偏移
+    console.log(e.changedTouchs[0].clientX);  // 获得第一个手指相对于视觉视口的横向偏移
+    console.log(e.changedTouchs[0].pageX);  // 获得第一个手指相对于布局视口的横向偏移
 }
 ```
 
