@@ -84,6 +84,7 @@ var MyEle = Nova({
 * gulp watch
 
 ---
+
 ### Event
 
 ```javascript
@@ -91,6 +92,29 @@ ele.on('wakeup', handler);
 ele.trigger('wakeup');
 ele.off('wakeup');
 ```
+
+---
+
+### Behavior
+
+```javascript
+
+var PluginBehavior = {
+    props: {
+        pluginName: String
+    },
+    created: function() {},
+    share: function() {}
+}
+
+var ele = Nova({
+    is: 'my-ele',
+    behavior: [PluginBehavior]
+});
+```
+
+* Behavior可在生命周期的4个回调执行代码
+* Behavior的props和方法会被mix到元素上
 
 ---
 
