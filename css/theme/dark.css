@@ -212,6 +212,24 @@ body {
     color: #333!important;
 }
 
+/******************** 暂时将light设为默认theme *************************/
+body {
+    background-color: #eaeaea;
+    background: #eaeaea;
+}
+.reveal {
+    color: #333;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal a,
+.reveal p,
+.reveal a:hover {
+    color: #333;
+}
+
 /*********************************************
  * background image
  *********************************************/

@@ -1,0 +1,52 @@
+/************************* Helpers ***********************/
+.reveal .vertical-middle {
+    vertical-align: middle;
+}
+
+.reveal strong {
+    color: #d5552d;
+}
+
+.reveal .stamp {
+    display: none;
+    color: #d5552d;
+    color: rgb(206, 21, 21);
+    font-size: 184px;
+    border: 8px solid rgb(206, 21, 21);
+    padding: 100px 150px;
+    -webkit-transform: rotate(20deg) translate(-50%, -50%);
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/************************* selfintro ***********************/
+.self-intro h2 {
+    color: white;
+}
+
+.self-intro .avatar {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    background: url(../../img/web_component/avatar.jpg) no-repeat center center;
+    background-size: 213px;
+}
+.self-intro .name {
+    display: inline-block;
+    padding-left: 30px;
+    position: relative;
+    top: -45px;
+}
+.contact-list .fa{
+    font-size: 46px; 
+    padding-right: 10px;
+}
+
+.contact-list li,
+.contact-list li a {
+    color: white;
+}

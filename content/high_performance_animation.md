@@ -350,6 +350,8 @@
 
 <img src="img/high_performance_animation/animate-height-2x.png" alt="" width="46%" style="vertical-align:top"/>
 <img src="img/high_performance_animation/animate-transform-2x.png" alt="" width="46%" style="vertical-align:top"/>
+<span class="pixel pixel-mobile"></span>
+<span class="pixel pixel-pc"></span>
 
 ---
 

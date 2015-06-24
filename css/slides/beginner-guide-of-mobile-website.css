@@ -1,0 +1,10 @@
+.reveal .layout-column {
+    display: table;
+    text-align: center;
+    width: 70%;
+    margin: auto;
+}
+
+.layout-column .column {
+    display: table-cell;
+}
