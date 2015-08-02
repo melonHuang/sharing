@@ -122,3 +122,170 @@ to {
   font-weight: bold;
   font-size: 24px;
 }
+
+/************************ layer ********************************/
+.page-layer {
+    display: inline-block;
+    background: white;
+    width: 500px;
+    height: 500px;
+    border: 1px solid #999;
+    box-shadow: 0 0 12px 1px #ccc;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+.reveal .page-inner {
+    margin-top: 30px;
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    transition: all 1s linear 3s;
+}
+
+.reveal .visible .page-inner {
+    border: 1px solid #999;
+    box-shadow: 0 0 12px 1px #ccc;
+    -webkit-animation: texturemove 3s linear 4s infinite;
+}
+
+/************************ paper ********************************/
+.reveal .paper {
+    display: inline-block;
+    width: 450px;
+    height: 500px;
+    background: #ffdce2;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 12px 1px #ccc;
+    overflow: hidden;
+}
+
+.reveal .paper.visible .cpu-paint
+{
+    -webkit-animation: cpupaint 160s steps(80) infinite;
+}
+.reveal .paper.visible .gpu-paint
+{
+    -webkit-animation: cpupaint 80s steps(40) infinite;
+}
+.reveal .paper.visible .pencil {
+    -webkit-animation: pencil 4s linear infinite;
+}
+.reveal .paper.visible .mask {
+    -webkit-animation: mask 4s linear infinite;
+}
+
+.reveal .paper.visible .stamp {
+    -webkit-animation: mask 1s steps(2) infinite;
+}
+
+.reveal .cpu-paint,
+.reveal .gpu-paint
+{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-top: 150px;
+    background: url(../../img/high_performance_animation/heart.png) no-repeat center center;
+    background-size: cover;
+}
+
+.reveal .pencil {
+    width: 100%;
+    height: 100%;
+    background: url(../../img/high_performance_animation/pencil.png) no-repeat center center;
+    background-size: auto 100%;
+    transform: rotate(-45deg) translateY(-21%);
+    top: 5%;
+}
+
+.reveal .mask {
+    //display: none;
+    width: 150%;
+    height: 150%;
+    background: url(../../img/high_performance_animation/mask.png) no-repeat center center;
+    background-size: cover;
+    transform: rotate(-45deg) translateY(-21%) translateX(25%);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.reveal .gpu-paint {
+}
+
+.reveal .stamp {
+    width: 200%;
+    height: 400%;
+    background: url(../../img/high_performance_animation/stamp.png) no-repeat center center;
+    background-size: 100% auto;
+    transform: translateY(-28%) translateX(-8%);
+}
+
+@-webkit-keyframes stamp {
+    0 {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    0 {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes cpupaint {
+    0 {
+    }
+    100% {
+        transform: scale(4);
+    }
+}
+
+@-webkit-keyframes mask {
+    0 {
+        transform: rotate(-45deg) translateY(-21%);
+    }
+    100% {
+        transform: rotate(-45deg) translateY(55%);
+    }
+}
+@-webkit-keyframes pencil {
+    0% {
+        transform: rotate(-45deg) translateY(-21%) translateX(45%) translateY(0);
+    }
+    10% {
+        transform: rotate(-45deg) translateY(-21%) translateX(-45%) translateY(10%);
+    }
+    20% {
+        transform: rotate(-45deg) translateY(-21%) translateX(45%) translateY(20%);
+    }
+    30% {
+        transform: rotate(-45deg) translateY(-21%) translateX(-45%) translateY(30%);
+    }
+    40% {
+        transform: rotate(-45deg) translateY(-21%) translateX(45%) translateY(40%);
+    }
+    45% {
+        transform: rotate(-45deg) translateY(-21%) translateX(-45%) translateY(45%);
+    }
+    60% {
+        transform: rotate(-45deg) translateY(-21%) translateX(45%) translateY(60%);
+    }
+    70% {
+        transform: rotate(-45deg) translateY(-21%) translateX(-45%) translateY(70%);
+    }
+    80% {
+        transform: rotate(-45deg) translateY(-21%) translateX(45%) translateY(80%);
+    }
+    90% {
+        transform: rotate(-45deg) translateY(-21%) translateX(-45%) translateY(90%);
+    }
+    100% {
+        transform: rotate(-45deg) translateY(-21%) translateX(45%) translateY(100%);
+    }
+}

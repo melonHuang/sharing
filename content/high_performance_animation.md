@@ -279,14 +279,32 @@
 
 ---
 
+### GPU vs CPU
+
+<img src="img/high_performance_animation/cpu_vs_gpu.png" alt="" />
+
+---
+
 @state: light, @fragment
 
-## GPU
+### Texture
 
-* 术语：texture。可看做一个放在GPU上的位图
-* GPU擅长对texture进行偏移，放大缩小，旋转，更改透明度
+* CPU传输到GPU的一个Bitmap
+* GPU能快速对texture进行偏移、缩放、旋转、修改透明度等操作
 
 <div class="texture-demo fragment"></div>
+
+---
+
+@state: light, @fragment
+
+## Layer 模型
+
+<div class="page-layer fragment">
+    <div class="page-inner">
+        <img src="img/high_performance_animation/minion.jpg" alt="" />
+    </div>
+</div>
 
 ---
 
@@ -302,14 +320,14 @@
 
 @state: light, @fragment
 
-## Layer触发条件
+## Layer创建规则
 
 * 3d或perspective transform属性
 * 使用animation, transition改变opacity, transform的元素
-* video 
-* canvas
-* flash
-* CSS filters
+* 使用加速视频解码的video元素
+* 拥有3D(WebGL)上下文或加速的2D上下文的canvas元素
+* 混合插件(如Flash)
+* 拥有加速CSS filters的元素
 * 覆盖在Layer上的元素
 
 ---
@@ -361,6 +379,21 @@
 
 * CPU进行Layout, Paint的时间
 * CPU向GPU传输位图的时间
+
+---
+
+<div class="paper fragment">
+    <div class="cpu-paint">
+        <div class="mask"></div>
+        <div class="pencil"></div>
+    </div>
+</div>
+
+<div class="paper fragment">
+    <div class="gpu-paint">
+        <div class="stamp"></div>
+    </div>
+</div>
 
 ---
 

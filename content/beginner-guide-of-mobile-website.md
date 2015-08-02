@@ -31,6 +31,24 @@
 
 ---
 
+
+<img src="img/beginner_guide_of_mobile_website/play.jpg" alt="" />
+
+---
+
+### 快速传播
+
+<img src="img/beginner_guide_of_mobile_website/qrcode.png" alt="" />
+
+---
+
+### 实时更新的移动应用
+
+<img src="img/beginner_guide_of_mobile_website/shake.jpg" alt="" height="394"/>
+<img src="img/beginner_guide_of_mobile_website/taobao.jpg" alt="" height="394"/>
+
+---
+
 @bg: img/beginner_guide_of_mobile_website/mobile_bg.jpg
 
 ---
