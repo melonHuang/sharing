@@ -265,9 +265,9 @@
 
 @state: light, @fragment
 
-## 渲染小结
+## 小结
 
-* 渲染主要三阶段：Layout计算范围，Paint计算展现，Composite合成Bitmap
+* 渲染三阶段：Layout，Paint，Composite
 * 修改不同CSS属性会触发不同阶段
 * 触发的阶段越前，渲染的代价越高
 
@@ -278,10 +278,27 @@
 # 硬件加速
 
 ---
+@state: light
 
 ### GPU vs CPU
 
 <img src="img/high_performance_animation/cpu_vs_gpu.png" alt="" />
+
+---
+@state: light
+
+<div class="paper fragment">
+    <div class="cpu-paint">
+        <div class="mask"></div>
+        <div class="pencil"></div>
+    </div>
+</div>
+
+<div class="paper fragment">
+    <div class="gpu-paint">
+        <div class="stamp"></div>
+    </div>
+</div>
 
 ---
 
@@ -334,7 +351,6 @@
 
 @state: light
 
-### 为什么使用硬件加速实现动画快？
 <img src="img/high_performance_animation/rocket.png" alt="" />
 
 ---
@@ -380,20 +396,6 @@
 * CPU进行Layout, Paint的时间
 * CPU向GPU传输位图的时间
 
----
-
-<div class="paper fragment">
-    <div class="cpu-paint">
-        <div class="mask"></div>
-        <div class="pencil"></div>
-    </div>
-</div>
-
-<div class="paper fragment">
-    <div class="gpu-paint">
-        <div class="stamp"></div>
-    </div>
-</div>
 
 ---
 
