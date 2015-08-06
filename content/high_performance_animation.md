@@ -259,6 +259,7 @@
 ### CSS style 影响
 
 <img src="img/high_performance_animation/statistic.png" alt="" />
+<a href="http://csstriggers.com/#">CSS Triggers</a>
 
 
 ---
@@ -337,15 +338,36 @@
 
 @state: light, @fragment
 
-## Layer创建规则
+## Layer创建标准
 
-* 3d或perspective transform属性
-* 使用animation, transition改变opacity, transform的元素
-* 使用加速视频解码的video元素
-* 拥有3D(WebGL)上下文或加速的2D上下文的canvas元素
-* 混合插件(如Flash)
-* 拥有加速CSS filters的元素
-* 覆盖在Layer上的元素
+* 拥有3d transform属性
+* 使用animation, transition实现opacity, transform的动画
+* video
+* canvas
+* Flash
+* 使用CSS filters的元素
+* z-index大于某个相邻节点的Layer的元素
+
+<a href="http://codepen.io/melonHuang/pen/PqXvjv" target="blank" class="fragment">Demo</a>
+
+---
+@state: light
+
+### translate3d(0, 0, 0);
+
+<div class="fragment cross-line"></div>
+
+---
+
+@state: light
+
+### will-change
+
+```css
+.to-animate {
+    will-change:transform,opactiy;
+}
+```
 
 ---
 
@@ -540,6 +562,18 @@ clientHeight, clientLeft, clientTop, clientWidth, focus(), getBoundingClientRect
 * 使用transform代替top, left的动画
 
 ---
+@state: light
+
+### 几次触发Layout?
+
+```javascript
+element1.style.height = '100px';
+element2.style.height = '100px';
+element3.style.height = '100px';
+
+```
+
+---
 
 
 @state: light, @fragment
@@ -547,28 +581,31 @@ clientHeight, clientLeft, clientTop, clientWidth, focus(), getBoundingClientRect
 ###  频繁Layout
 
 ```javascript
-var h1 = element1.clientHeight;              
-element1.style.height = (h1 * 2) + 'px';   // 引起Layout
+var h1 = element1.clientHeight;
+element1.style.height = (h1 * 2) + 'px';
 
 var h2 = element2.clientHeight; 
-element2.style.height = (h2 * 2) + 'px';   // 引起Layout
+element2.style.height = (h2 * 2) + 'px';
 
 var h3 = element3.clientHeight;
-element3.style.height = (h3 * 2) + 'px';   // 引起Layout
+element3.style.height = (h3 * 2) + 'px';
 
 ```
 
 ---
 
-@state: light, @fragment
+@state: light
 
 <img src="img/high_performance_animation/before.png" alt="" />
+<div>
+<a href="http://hw.360.cn/sharing/demos/high_performance_animation/too-much-layout.html">Demo</a>
+</div>
 
 ---
 
 @state: light, @fragment
 
-### 分离读写操作 
+### 先读后写
 
 ```javascript
 // Read
@@ -635,7 +672,7 @@ document.body.addEventListener('click', function() {
 
 @state: light, @fragment
 
-### wirte后read肿么办？
+### write后read肿么办？
 
 ```javascript
 // Read
@@ -709,17 +746,18 @@ fastdom.write(function() {
 
 @state: light, @fragment
 
-### Paint的代价 
+### Paint的代价
 
 * [demo](demos/high_performance_animation/paint.html)
 * continuous painting mode
+* paint profiler
 * 在经常paint的区域，要避免代价太高的style
 
 ---
 
 @state: light, @fragment
 
-### 减少不必要的Paint
+### 减少不必的绘制
 
 * [Gif Demo](http://jsbin.com/dizak/3/edit)
 * gif图即使被其他Layer盖住不可见，也可能导致paint，不需要时应将gif图的display属性设为none。
@@ -727,7 +765,7 @@ fastdom.write(function() {
 ---
 @state: light, @fragment
 
-### 减小Paint的区域
+### 减少绘制区域
 
 * [Demo](http://www.html5rocks.com/static/demos/scrolling/demo.html#)
 * 为引起大范围Paint的元素生成独立的Layer以减小Paint的范围
@@ -737,9 +775,9 @@ fastdom.write(function() {
 
 ## Paint小结
 
-* 不同CSS Style的paint代价不同，刷新频繁的区域应避免使用这些style
-* 避免不必要的painting, 如藏在底下默默repaint的gif图
-* 通过生成Layer, 尽量减小paint的区域
+* 简化绘制的复杂度
+* 避免不必要的绘制
+* 减少绘制区域
 
 ---
 @state: light
@@ -774,12 +812,56 @@ fastdom.write(function() {
 
 @state: light, @fragment
 
-# Scroll
+## 用户输入事件
+
+* touchmove, mousemove, scroll, etc
+
+---
+@state: light
+
+### 理想的滚动过程
+
+<img src="img/high_performance_animation/compositor-scroll.jpg" alt="" />
+
+---
+@state: light
+
+### ontouchmove
+
+<img src="img/high_performance_animation/ontouchmove.jpg" alt="" />
+
+<a href="http://www.rbyers.net/janky-touch-scroll.html" class="fragment">Demo</a>
 
 ---
 @state: light, @fragment
 
-### 将样式操作从scroll事件中剥离 
+### hit testing
+
+* Chrome会不断监测哪些区域有绑定touch相关事件, 减少Compositor与Main Thread不必要的通信
+* 事件代理无法利用该优化
+* show potential scroll bottlenecks
+
+---
+@state: light, @fragment
+
+### touch-action
+
+* 设计思想：由CSS属性决定是否阻止默认行为
+* touch-action指明了元素支持哪些touch相关的默认操作
+* touch-action: auto | none | pan-x | pan-y | manipulation | double-tap-zoom
+* [Support](http://www.quirksmode.org/mobile/default.html)
+
+---
+@state: light
+
+### 避免在输入事件处理函数中修改样式属性
+
+<img src="img/high_performance_animation/frame-with-input.jpg" alt="" />
+
+---
+@state: light, @fragment
+
+### 将样式操作从scroll事件中剥离
 
 ```javascript
 var latestKnownScrollY = 0,
@@ -809,23 +891,11 @@ function update() {
 ---
 @state: light, @fragment
 
-### scroll过程中hover的代价 
+### scroll过程中hover的代价
 
 * [demo](https://dl.dropboxusercontent.com/u/2272348/codez/expensivescroll/demo.html)
 
 * 开始滚动后通过event-pointer: none禁止鼠标行为，减少不必要的repaint。
-
----
-@state: light, @fragment
-
-### 绑定touch事件给Scroll带来的副作用
-
-* [demo](http://www.rbyers.net/janky-touch-scroll.html)
-* 滚动时，browser会等待touchmove的回调函数完成后，才能决定是否滚动。因此touchmove handler会阻塞默认滚动。
-* 使用css属性touch-action:none，避免阻塞 
-* 有的浏览器了做优化，如果区域没绑定touch事件，就不会被js阻塞。
-* 因此不要在不需要touchevent的区域绑定事件, 尤其是document。
-* mousewheel同理
 
 ---
 @state: green
@@ -838,35 +908,39 @@ function update() {
 
 ## Checklist
 
-* 频繁触发Layout 
-* 对会触发Layout的属性做动画
+* FPS
+* 频繁触发Layout
+* 对会触发Layout的属性做动画, 如top, left
 * 大范围的paint
 * 昂贵的paint
-* scroll, hover等用户交互引起的代价 
+* 用户输入交互引起的代价
 * 避免在动画过程中触发垃圾回收
 
 ---
 @state: blue, @fragment
 
-### 实践是检验真理的唯一标准 
+### 实践是检验真理的唯一标准
 
 * timeline
 * show paint rectangles
 * show composite layer borders
+* show FPS meter
 * continuous painting mode
-* show scroll bottleneck
+* show potential scroll bottleneck
+* chrome://tracing
+
 ---
 
 @state: red
 
-### Resources 
+### Resources
 
-* [jankfree](http://jankfree.org/) 
+* [jankfree](http://jankfree.org/)
+* [performance guide by Google](https://developers.google.com/web/fundamentals/performance/rendering/)
 
 ---
 
 @state: green, @fragment
 
-# THANKS 
+# THANKS
 
----

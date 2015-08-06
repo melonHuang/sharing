@@ -289,3 +289,12 @@ to {
         transform: rotate(-45deg) translateY(-21%) translateX(45%) translateY(100%);
     }
 }
+/************************ cross line ********************************/
+.reveal .cross-line {
+    height: 3px;
+    background: #333;
+    margin: auto;
+    position: relative;
+    top: -65px;
+    width: 400px;
+}
