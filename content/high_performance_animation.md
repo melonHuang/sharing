@@ -258,7 +258,6 @@
 
 ### CSS style 影响
 
-<img src="img/high_performance_animation/statistic.png" alt="" />
 <div>
     <a href="http://csstriggers.com/#">CSS Triggers</a>
 </div>
