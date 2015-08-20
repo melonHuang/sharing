@@ -259,7 +259,9 @@
 ### CSS style 影响
 
 <img src="img/high_performance_animation/statistic.png" alt="" />
-<a href="http://csstriggers.com/#">CSS Triggers</a>
+<div>
+    <a href="http://csstriggers.com/#">CSS Triggers</a>
+</div>
 
 
 ---
@@ -318,10 +320,12 @@
 
 ## Layer 模型
 
-<div class="page-layer fragment">
-    <div class="page-inner">
-        <img src="img/high_performance_animation/minion.jpg" alt="" />
-    </div>
+<div class="page-layer-wrap fragment">
+<div class="page-layer">
+</div>
+<div class="page-inner">
+    <img src="img/high_performance_animation/minion.jpg" alt="" />
+</div>
 </div>
 
 ---
@@ -539,7 +543,7 @@
 
 ## 触发Layout
 
-* 更改class，导致width, height, margin等size, position相关得属性改变。
+* 改变width, height, margin等和大小、位置相关的属性
 * 读取size, position相关得属性<img class="alert" src="img/high_performance_animation/alert.png" alt="" />
 
 ---
@@ -564,7 +568,7 @@ clientHeight, clientLeft, clientTop, clientWidth, focus(), getBoundingClientRect
 ---
 @state: light
 
-### 几次触发Layout?
+### 触发几次Layout?
 
 ```javascript
 element1.style.height = '100px';
@@ -598,7 +602,7 @@ element3.style.height = (h3 * 2) + 'px';
 
 <img src="img/high_performance_animation/before.png" alt="" />
 <div>
-<a href="http://hw.360.cn/sharing/demos/high_performance_animation/too-much-layout.html">Demo</a>
+<a href="demos/high_performance_animation/too-much-layout.html">Demo</a>
 </div>
 
 ---

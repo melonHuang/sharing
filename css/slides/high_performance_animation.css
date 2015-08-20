@@ -124,30 +124,45 @@ to {
 }
 
 /************************ layer ********************************/
-.page-layer {
+.reveal .slides section .page-layer-wrap {
     display: inline-block;
-    background: white;
     width: 500px;
     height: 500px;
+    position: relative;
+}
+
+.reveal .slides section .page-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: white;
     border: 1px solid #999;
     box-shadow: 0 0 12px 1px #ccc;
-    text-align: center;
-    box-sizing: border-box;
+    transition: transform 1s linear 2s;
+}
+
+.reveal .visible .page-layer {
+    transform: rotateY(30deg);
 }
 
 
 .reveal .page-inner {
-    margin-top: 30px;
-    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 300px;
     height: 300px;
-    transition: all 1s linear 3s;
+    transition: all 1s linear 2s;
 }
 
 .reveal .visible .page-inner {
     border: 1px solid #999;
     box-shadow: 0 0 12px 1px #ccc;
-    -webkit-animation: texturemove 3s linear 4s infinite;
+    transform: translateZ(50px) rotateY(30deg);
+    //-webkit-animation: texturemove 3s linear 4s infinite;
 }
 
 /************************ paper ********************************/
@@ -155,7 +170,7 @@ to {
     display: inline-block;
     width: 450px;
     height: 500px;
-    background: #ffdce2;
+    background: white;
     border: 1px solid #ccc;
     box-shadow: 0 0 12px 1px #ccc;
     overflow: hidden;
