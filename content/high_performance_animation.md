@@ -944,7 +944,8 @@ function update() {
 
 ---
 
-@state: green, @fragment
+@state: green
 
 # THANKS
 
+<img src="http://p8.qhimg.com/t011ddc267b7c716696.png" alt="" width="40%">

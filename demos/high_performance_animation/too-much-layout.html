@@ -52,6 +52,7 @@
         <section>
         <button id="thrash">With layout thrash</button>
         <button id="nothrash">Without layout thrash</button>
+        <button id="reset">Reset height</button>
         <section id="speed"></section>
         <section>
         <div></div>
@@ -85,12 +86,17 @@
                 : Date.now();
             };
 
+            var resetBtn = document.querySelector('#reset');
+            resetBtn.onclick = function() {
+                reset();
+            }
+
             /**
             * Thrashing solution
             */
 
             thrash.onclick = function() {
-                reset();
+                //reset();
 
                 var start = now();
 
@@ -109,7 +115,7 @@
             */
 
             nothrash.onclick = function() {
-                reset();
+                //reset();
 
                 var start = now();
 
