@@ -17,7 +17,7 @@
     <li>黄薇</li>
     <li>360奇舞团</li>
     <li>
-        <a href="http://75team.github.io/novaUI/" style="color:white">NovaUI</a>
+        <a href="http://75team.github.io/novaUI/" style="color:white">Nova.js</a>
     </li>
     <li>
         <a href="http://melonh.com/animationGenerator/" style="color:white">Animation Generator</a>
@@ -51,24 +51,110 @@
 
 @bg: img/beginner_guide_of_mobile_website/mobile_bg.jpg
 
+<h1 style="text-align:center;margin-top: -200px;text-shadow:none;">进入移动世界</h1>
+
 ---
+
+### 屏幕尺寸
 
 <img src="img/beginner_guide_of_mobile_website/iphone5.png" class="vertical-middle" style="width:20%;" alt="" />
 <img src="img/beginner_guide_of_mobile_website/pc.png" class="vertical-middle" style="width:60%;" alt="" />
 
 ---
 
+### 屏幕分辨率
 
-## 浏览器
+<img src="img/beginner_guide_of_mobile_website/resolution-chart.png" class="vertical-middle" style="" alt="" />
 
-* 内置浏览器:
-    * IOS: Safari
-    * Windows Phone: IE
-    * Android 2.x和大部分Android 4.x: 安卓WebKit
-    * Chrome拥有的Nexus: Google Chrome
-    * Android4.4及以上：三星使用三星Chrome
-    * Amazon: Silk
-* 可下载浏览器:Firefox, Opera, UC, QQ, 360, etc
+---
+
+### 移动网络和性能
+
+* 网络速度不一：WiFi, 4G, 3G, 2G
+* 流量需要收费
+* 移动设备性能相对PC较低
+
+---
+
+## 运行环境
+
+---
+
+### 操作系统
+
+<ul>
+    <li>IOS 32%</li>
+    <li>Android 68%</li>
+    <li><del>Windows Phone</del></li>
+</ul>
+
+---
+
+### IOS
+<img src="img/beginner_guide_of_mobile_website/ios-version.png"  style="" alt="" />
+
+---
+
+### Android
+<img src="img/beginner_guide_of_mobile_website/android-version.png"  style="" alt="" />
+
+---
+
+### 浏览器
+
+* 均基于WebKit内核
+* 三种类型
+    * 内置浏览器
+    * 第三方浏览器
+    * WebView
+
+---
+
+### 内置浏览器
+
+* 即系统自带的浏览器
+* IOS: Safari
+* Android 4.3及以下：Android内置浏览器
+* Android 4.4及以上：
+    * 谷歌不再升级Android内置浏览器
+    * 其它厂商可以使用Google Chrome，或自行开发（例如：三星Chrome、HTC Chrome）
+
+---
+
+### 第三方浏览器
+
+* 即用户自己下载安装的浏览器
+* 国内最流行：UC, QQ, Opera
+* 省流量模式：浏览器在服务端解析HTML，给用户渲染好的页面图片
+
+---
+
+### Webview
+
+* 操作系统留给原生应用的浏览器接口
+* 国内常见：微信打开网页、手机淘宝
+* IOS: 基于Safari底层
+* Android:
+    * 4.3及以下：基于Android内置浏览器底层
+    * 4.4及以上：基于Google Chrome浏览器底层
+
+---
+
+### 测试IOS
+
+* IOS的所有浏览器都基于Safari的底层
+* 只需测试：
+    * Safari浏览器，富含多个系统版本
+    * 开启省流量模式的第三方浏览器
+
+---
+
+### 测试Android
+
+* Android WebKit 4.x 富含不同设备和安卓版本
+* Google Chrome
+* 三星Chrome, HTC Chrome等
+* 根据目标用户，可能要测试Android WebKit 2.3, QQ, UC等。
 
 ---
 
@@ -78,7 +164,7 @@
 
 ---
 
-## HTML5语义化标签
+### HTML5语义化标签
 
 * header
 * footer
@@ -90,7 +176,7 @@
 
 ---
 
-## 离线存储
+### 离线存储
 
 * 可使用localStorage存储信息到用户的设备中
     * localStorage.getItem
@@ -98,14 +184,14 @@
 
 ---
 
-## 地理位置
+### 地理位置
 
 * 移动特性
 * 使用navigator.getlocation来说去用户地理位置
 
 ---
 
-## 设备转向和螺旋仪
+### 设备转向和螺旋仪
 
 * 摇一摇
 * devicemotion事件
@@ -113,7 +199,7 @@
 
 ---
 
-## CSS3特性
+### CSS3特性
 
 * 圆角与阴影
 * 渐变背景
@@ -128,6 +214,16 @@
 
 ---
 
+### Mobile vs. PC
+
+* 屏幕小，交互方式不同
+* 性能较低，代码需高效
+* 网速慢、流量贵，代码需小巧快速
+* 运行环境复杂，需广泛测试
+* 对标准支持好，可使用高级实现方法
+
+---
+
 @bg: img/beginner_guide_of_mobile_website/explore.png
 
 
@@ -137,7 +233,17 @@
 
 ---
 
-### 使用Google Chrome的开发者工具可模拟:
+### 开发工具
+
+* Google Chrome
+* 脚本库
+    * 原生JS
+    * Zepto.js
+* 调试：Google Chrome
+
+---
+
+### Google Chrome开发者工具可模拟:
 
 * 设备: 尺寸、旋转
 * 媒介: print, screen, etc
@@ -146,7 +252,7 @@
 
 ---
 
-## Android远程调试
+### Android远程调试
 
 <img src="img/beginner_guide_of_mobile_website/debug.png" style="width:70%" alt="" />
 
@@ -154,12 +260,23 @@
 
 ---
 
-## IOS远程调试
+### IOS远程调试
 
 <img src="img/beginner_guide_of_mobile_website/safari.png" style="width:50%" alt="" />
 
 <a href="http://moduscreate.com/enable-remote-web-inspector-in-ios-6/">教程</a>
 
+---
+
+### 条件
+
+* IOS 6+
+* Android WebKit 4.0+ Google Chrome
+* Android Webview 4.4.4+，并在客户端开启远程调试
+
+---
+
+## Viewport
 
 ---
 
@@ -167,21 +284,39 @@
 <img src="img/beginner_guide_of_mobile_website/pc.png" class="vertical-middle" style="width:60%;" alt="" />
 
 ---
-@fragment
 
-## CSS像素
+### CSS像素
 <img src="img/beginner_guide_of_mobile_website/csspixel.png" alt="" />
 
-* devicePixelRatio = 设备像素 / CSS像素
+* DPR(devicePixelRatio) = 设备像素 / CSS像素
+
+---
+
+### 常见手机分辨率
+
+<style>
+    table {
+        margin: auto;
+    }
+</style>
+
+|机型|物理分辨率|CSS分辨率|DPR|
+|---|---|---|---|
+|小米手机3 | 1080 X 1920 | 360 X 640 | 3 |
+|三星Note II | 720 X 1280 | 360 X 640 | 2 |
+|iPhone 5S | 640 X 1136 | 320 X 668 | 2 |
+
+---
+
+<img src="http://qrapi.cli.im/qr?data=http%253A%252F%252Fcode.w3ctech.com%252Fdetail%252F2388%253Fpreview%253D1&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=a2333a786d7c17e88f0b3df8ece54c55" alt="">
 
 ---
 @fragment
 
-## 视口(Viewport)
+### Viewport(视口)
 
-* 布局视口: CSS布局会被它约束。可看作初始包含块的宽度。document.documentELement.width/height
-* 视觉视口: 用户屏幕中看到区域的CSS像素。window.innerWidth/Height
-* 理想视口: 浏览器认为对设备来说最合适的布局视口的大小
+* 布局视口
+* 视觉视口
 
 ---
 
@@ -196,13 +331,48 @@
 <img src="img/beginner_guide_of_mobile_website/visualviewport.jpg" alt="" />
 
 ---
-@fragment
 
-## Viewport Meta
+### 理解视口
+
+* 布局视口
+    * 风景
+    * 决定页面初始包含块的大小
+    * document.documentElement.offsetWidth
+* 视觉视口
+    * 窗户
+    * 透过视口看页面
+    * window.innerWidth
+
+---
+
+### 理解缩放
+
+<img src="http://qrapi.cli.im/qr?data=http%253A%252F%252Fcode.w3ctech.com%252Fdetail%252F2389%253Fpreview%253D1&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=5b4dec55f2d625dfd11cdedfd18fcb14" alt="">
+
+---
+
+### 视口大小
+
+* 默认视口
+    * 布局视口的默认大小
+    * 保证PC网页正常渲染
+* 理想视口
+    * 浏览器认为的理想布局视口大小
+    * 理想即指：10px实际大小与PC接近，可读
+
+---
+
+### 定义布局视口
 
 ```markup
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="viewport"
+      content="width=device-width,initial-scale=1"
+/>
 ```
+
+---
+
+### Viewport Meta
 
 * width: 布局视口宽度
 * initial-scale: 页面的初始缩放成都和布局视口的宽度
@@ -212,11 +382,19 @@
 
 ---
 
-## Test
+### Viewport总结
 
-1. 什么是CSS像素和设备像素比？
-2. 移动浏览器的三个视口是什么？
-3. 当页面放大时，移动端浏览器的视口如何改变？
+* CSS像素
+    * 解决设备之间物理像素不一致
+    * DPR = 物理像素 / CSS像素
+* 视口
+    * 布局视口
+    * 视觉视口
+* 布局视口大小
+    * 默认视口
+    * 理想视口
+    * 自定视口：Viewport Meta
+
 
 ---
 
@@ -241,33 +419,31 @@
 
 ---
 
-### 媒体查询（Media Query）
+### Media Query
 
-* 针对不同屏幕应用不同的样式
+针对不同屏幕, 应用不同的样式
+
 
 ```markup
 <link rel="stylesheet" href="m.css" media="screen and (max-width:480px)"/>
+```
 
-<style type="text/css">
+```css
 @media screen and (min-width: 480) {
-    .selector {
-        // ...
-    }
+    .selector { // ...  }
 }
-</style>
 ```
 
 ---
-@fragment
 
-## 媒体查询
+### 可查询的属性
 
 * (min/max-)width/height
 * orientation
 * resolution
 * device-pixel-ratio
 * (min/max-)aspect-ratio
-* device-width, device-height, device-aspect-ratio 不可靠
+* device-width, device-height, device-aspect-ratio
 * <a href="http://jsbin.com/mavexo/1/edit?html,css,output">Demo</a>
 
 ---
@@ -347,29 +523,41 @@ display: table-header-group   /* <thead>     */
 ---
 @fragment
 
-## 液态图片
+### 响应式设计中的图片
 
-```css
-img {
-    max-width: 100%;
-}
-```
+* 大图随容器自动缩放，保持比例
+* 根据屏幕的分辨率，适配不同清晰度的图片
 
 ---
 
-## 使用2x图片
+### 自动缩放
+
+* max-width: 100%
+* background-size: cover
+
+---
+
+### 自适应高清屏
 
 * width:200px的img，使用分辨率宽为400的图片
 * background-size: 50% auto;
 * srcset和picture
 ```markup
-<img src="low-res.jpg" srcset="high-res.jpg 2x"> 
+<img src="low-res.jpg" srcset="high-res.jpg 2x">
 <picture> 
     <source srcset="med.jpg 1x, med-hd.jpg 2x" media="(min-width: 40em)" />  
     <source srcset="sm.jpg 1x, sm-hd.jpg 2x" />  
     <img src="fallback.jpg" alt="" /> 
 </picture> 
 ```
+
+---
+
+### 其它选项（减少图片的使用）
+
+* 使用SVG图片
+* 使用CSS模拟形状
+* 使用Webfont
 
 ---
 
@@ -390,7 +578,21 @@ window.addEventListener("orientationchange", function() {
 
 ---
 
-## Test
+### Test
+
+<a href="http://75team.github.io/novaUI/">Demo</a>
+
+---
+
+### 实现方案
+
+* float + 百分比宽度
+* inline-block + justify
+* flex
+
+---
+
+### Test
 
 <a href="http://codepen.io/melonHuang/pen/GJmRPb?editors=110">Demo</a>
 
@@ -421,6 +623,12 @@ window.addEventListener("orientationchange", function() {
 ### 兼容鼠标事件
 
 <img src="img/beginner_guide_of_mobile_website/comp.png" alt="" />
+
+---
+
+### 事件触发顺序
+
+<img src="http://qr.liantu.com/api.php?w=500&text=http://output.jsbin.com/qewiya" alt="">
 
 ---
 @fragment
@@ -457,6 +665,12 @@ window.ontouchstart = function(e) {
 ## Test
 
 使用Touch事件，实现对元素的拖动。
+
+---
+
+### touchcancel事件
+* 被系统通知、应用切换等中断
+* 超出边界
 
 ---
 @state: red

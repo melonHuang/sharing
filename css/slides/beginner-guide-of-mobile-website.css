@@ -8,3 +8,14 @@
 .layout-column .column {
     display: table-cell;
 }
+
+.reveal .slides>section table {
+    margin: auto;
+    border: 1px solid #ddd;
+    font-size: 24px;
+}
+
+.reveal .slides>section table td,
+.reveal .slides>section table th  {
+    padding: 10px;
+}
